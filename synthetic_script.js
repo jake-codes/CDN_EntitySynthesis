@@ -1,13 +1,23 @@
 /**
- * Feel free to explore, or check out the full documentation
- * https://docs.newrelic.com/docs/synthetics/new-relic-synthetics/scripting-monitors/writing-api-tests
- * for details.
+ * This script creates new CDN custom events used for Entity Synthesis
+ *     from SyntheticRequest URL's that contain the string 'cdn'.
+ * 
+ *     This script must be placed in a Synthetic API Test Monitor
+ *     to work properly and there must be existing SyntheticRequests.
+ * 
+ *     It can easily be extended to Browser and Mobile requests.
+ *     
+ *     The api test monitor can be run at any frequency, but the MONITOR_FREQUENCY_IN_MINUTES
+ *     variable below must be set to the same frequency so that duplicates do not
+ *     occur. (This logic can be made more robust in future iterations.)
  */
 
-const QUERY_KEY = `${$secure.RELI_HACK_QUERY_KEY}`;
-const INSERT_KEY = `${$secure.RELI_INGEST_KEY}`;
-const MONITOR_FREQUENCY_IN_MINUTES = '5';
-const ACCOUNT_ID = 1822040;
+// ------MODIFY THE FOLLOWING VARIABLES--------
+const QUERY_KEY = `{{QUERY_KEY}}`;
+const INSERT_KEY = `{{INGEST_KEY}}`;
+const ACCOUNT_ID = '{{ACCOUNT_ID}}';
+const MONITOR_FREQUENCY_IN_MINUTES = '5'; // This must match the monitor frequency
+//----------------END-------------------------
 
 const assert = require('assert');
 const Q = require('q');
