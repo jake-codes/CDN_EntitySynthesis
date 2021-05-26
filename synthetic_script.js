@@ -22,7 +22,7 @@ const getCDNRequests = function () {
   // const queryString = JSON.stringify({"query": nrqlQueryInGraphQL});
   const queryString = encodeURI(NRQL_CDNs_via_SyntheticRequests)
   const uri = 'https://insights-api.newrelic.com/v1/accounts/'+ACCOUNT_ID+'/query?nrql='+queryString;
-  console.log('uri: ', uri);
+  // console.log('uri: ', uri);
   const options = {
     //Define endpoint URI
     uri: uri,
@@ -57,13 +57,20 @@ const createCDNEvents = function(body) {
     for (let i = 0; i < resultArray.length; i++) {
       const event = {
         eventType: 'CDN',
-        cdn_url: resultArray[i]['URL']
+        cdn_url: resultArray[i]['URL'],
+        domain: resultArray[i]['domain'],
+        host: resultArray[i]['host'],
+        duration: resultArray[i]['duration'],
+        monitorName: resultArray[i]['monitorName'],
+        responseBodySize: resultArray[i]['responseBodySize'],
+        responseCode: resultArray[i]['responseCode']
+
       }
       cdnEvents.push(event);
     }
     deferred.resolve(cdnEvents);
   } catch (err) {
-    console.error('result array before error', resultArray)
+    console.error('Result array before createCDNEvents error', resultArray)
     deferred.reject(err);
   }
   return deferred.promise;
@@ -100,4 +107,3 @@ const postNewCDNRequests = function(cdnEvents) {
 
 // Execute promise chain
 getCDNRequests().then((body) => createCDNEvents(body)).then((cdnEvents) => postNewCDNRequests(cdnEvents));
-
