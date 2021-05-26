@@ -1,4 +1,4 @@
-#Api Test Monitor for NR Entity: ext-cdn_generic
+# Api Test Monitor for NR Entity: ext-cdn_generic
 
 This script creates new CDN custom events in New Relic  for the generic cdn [entity synthesis](https://github.com/newrelic-experimental/entity-synthesis-definitions/tree/main/definitions). It creates these CDN events from SyntheticRequest URL's that contain the string 'cdn'.
 
