@@ -73,6 +73,7 @@ const createCDNEvents = function(body) {
         duration: resultArray[i]['duration'],
         monitorName: resultArray[i]['monitorName'],
         responseBodySize: resultArray[i]['responseBodySize'],
+        responseHeaderSize: resultArray[i]['responseHeaderSize'],
         responseCode: resultArray[i]['responseCode']
 
       }
